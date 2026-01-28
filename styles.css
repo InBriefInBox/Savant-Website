@@ -1232,8 +1232,9 @@ body {
 
 .carousel-track {
     display: flex;
-    gap: 2rem;
-    animation: scroll-carousel 15s linear infinite;
+    gap: 3rem;
+    width: fit-content;
+    animation: scroll-carousel 40s linear infinite;
 }
 
 @keyframes scroll-carousel {
