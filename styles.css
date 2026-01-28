@@ -156,15 +156,20 @@ body {
     transform: translateX(-50%);
     width: fit-content;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.6rem 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    /* Lighter for full glass effect */
+    backdrop-filter: blur(40px);
+    /* Increased blur */
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.4rem 2rem;
+    /* Slimmer padding */
     border-radius: 100px;
     display: flex;
     justify-content: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 4px 30px rgba(0, 0, 0, 0.1),
+        inset 0 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 
@@ -177,12 +182,13 @@ body {
 }
 
 .nav-logo {
-    font-size: 2.375rem;
-    /* 38px equivalent */
+    font-size: 1.8rem;
+    /* Slightly smaller logo */
     font-weight: 300;
     color: #F4F0E6;
     text-transform: uppercase;
-    letter-spacing: 18px;
+    letter-spacing: 12px;
+    /* Adjusted tracking */
     font-family: 'Optima', 'Segoe UI', 'Candara', 'Bitstream Vera Sans', 'DejaVu Sans', sans-serif;
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
@@ -199,14 +205,19 @@ body {
 }
 
 .nav-links .nav-link {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    font-weight: 500;
-    padding: 0.8rem 1.5rem;
+    font-weight: 400;
+    padding: 0.6rem 1.2rem;
+    /* Slimmer padding */
     border-radius: 100px;
     transition: all 0.3s ease;
-    font-size: 1rem;
-    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    font-family: 'Playfair Display', serif;
+    /* Fancy font */
+    font-style: italic;
+    /* Matches site vibe */
     position: relative;
 }
 
