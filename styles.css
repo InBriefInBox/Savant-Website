@@ -177,8 +177,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 3rem;
+    gap: 4rem;
+    /* Increased gap */
     padding: 0 1rem;
+    flex-wrap: nowrap;
+    /* Prevent wrapping */
 }
 
 .nav-logo {
@@ -209,16 +212,15 @@ body {
     text-decoration: none;
     font-weight: 400;
     padding: 0.6rem 1.2rem;
-    /* Slimmer padding */
     border-radius: 100px;
     transition: all 0.3s ease;
     font-size: 0.9rem;
     letter-spacing: 1px;
     font-family: 'Playfair Display', serif;
-    /* Fancy font */
     font-style: italic;
-    /* Matches site vibe */
     position: relative;
+    white-space: nowrap;
+    /* Prevent multiline links */
 }
 
 .nav-links .nav-link:hover {
