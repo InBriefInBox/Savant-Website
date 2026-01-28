@@ -239,12 +239,13 @@ body {
     border-radius: 12px;
     text-decoration: none;
     font-weight: 600;
-    /* Increased from 500 */
     font-size: 0.95rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.6);
-    /* Increased from 0.4 */
     box-shadow: none;
+    white-space: nowrap;
 }
 
 .btn-nav-try:hover {
@@ -256,7 +257,10 @@ body {
 }
 
 .nav-links-right {
-    gap: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-shrink: 0;
 }
 
 @media (max-width: 1024px) {
