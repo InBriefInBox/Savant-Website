@@ -288,17 +288,21 @@ body {
 .nav-link-secondary {
     color: var(--text-primary);
     text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    /* Increased from 500 */
-    opacity: 1;
-    /* Increased from 0.8 */
+    font-size: 0.95rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
     transition: all 0.3s ease;
+    white-space: nowrap;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .nav-link-secondary:hover {
-    opacity: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-1px);
 }
 
