@@ -1,23 +1,5 @@
-// Smooth scroll for navigation links and active state
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            // Remove active class from all nav links
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-            });
-            // Add active class to clicked link
-            this.classList.add('active');
-
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+// Register GSAP ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
 
 // Update active nav link based on scroll position
 const sections = document.querySelectorAll('section[id]');
@@ -41,52 +23,89 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Animate elements on scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// GSAP Animations
+document.addEventListener('DOMContentLoaded', () => {
+    // Hero Stagger
+    const heroTl = gsap.timeline();
+    heroTl.from('.hero-title', {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'expo.out'
+    })
+        .from('.hero-subtitle', {
+            y: 40,
+            opacity: 0,
+            duration: 1,
+            ease: 'expo.out'
+        }, "-=0.8")
+        .from('.btn-hero-download', {
+            y: 20,
+            opacity: 0,
+            duration: 1,
+            ease: 'expo.out'
+        }, "-=0.6");
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+    // Background Parallax
+    gsap.to('.sunset-bg', {
+        scrollTrigger: {
+            trigger: 'body',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1
+        },
+        y: 150,
+        ease: 'none'
+    });
+
+    // Reveal animations for sections
+    const reveals = document.querySelectorAll('.max-feature-card, .testimonial-carousel-card, .premium-phone-mockup, .timer-circle');
+    reveals.forEach(el => {
+        gsap.from(el, {
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 60,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'expo.out'
+        });
+    });
+
+    // Premium Phone Parallax/Floating Effect
+    document.querySelectorAll('.premium-phone-mockup .phone-frame').forEach(phone => {
+        gsap.to(phone, {
+            scrollTrigger: {
+                trigger: phone,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+            },
+            y: -50,
+            rotateX: 10,
+            ease: 'none'
+        });
+    });
+
+    // Initialize custom effects
+    initStreakAnimation();
+    initTypewriterEffect();
+});
+
+// Smooth scroll (Native CSS is usually enough, but here's the JS version for better control)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
         }
     });
-}, observerOptions);
-
-// Observe feature cards and testimonials
-document.querySelectorAll('.feature-card, .testimonial-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
 });
-
-// Button interactions
-document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
-    button.addEventListener('click', function (e) {
-        // Create ripple effect
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.classList.add('ripple');
-
-        this.appendChild(ripple);
-
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-});
-
 
 // Interactive Streak Section Animation
 function initStreakAnimation() {
@@ -98,28 +117,29 @@ function initStreakAnimation() {
     const streakDays = streakSection.querySelector('.streak-days');
 
     // Create progress bar overlay
-    const progressBar = document.createElement('div');
-    progressBar.className = 'streak-progress-bar';
-    streakDays.appendChild(progressBar);
+    if (!streakSection.querySelector('.streak-progress-bar')) {
+        const progressBar = document.createElement('div');
+        progressBar.className = 'streak-progress-bar';
+        streakDays.appendChild(progressBar);
+    }
 
+    const progressBar = streakSection.querySelector('.streak-progress-bar');
     let currentStreak = 1;
 
     function updateStreak(scrollProgress) {
-        // Calculate streak based on scroll progress (1 to 7)
         const newStreak = Math.min(7, Math.max(1, Math.floor(scrollProgress * 7) + 1));
-
         if (newStreak !== currentStreak) {
             currentStreak = newStreak;
-
-            // Update title with animation
-            streakTitle.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                streakTitle.textContent = `${currentStreak} day${currentStreak > 1 ? 's' : ''} streak`;
-                streakTitle.style.transform = 'scale(1)';
-            }, 100);
+            gsap.to(streakTitle, {
+                scale: 1.05,
+                duration: 0.1,
+                onComplete: () => {
+                    streakTitle.textContent = `${currentStreak} day${currentStreak > 1 ? 's' : ''} streak`;
+                    gsap.to(streakTitle, { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.3)' });
+                }
+            });
         }
 
-        // Update circles
         dayCircles.forEach((circle, index) => {
             if (index < currentStreak) {
                 circle.classList.add('completed');
@@ -130,50 +150,17 @@ function initStreakAnimation() {
             }
         });
 
-        // Update progress bar width
         const progressWidth = (currentStreak / 7) * 100;
         progressBar.style.width = `${progressWidth}%`;
     }
 
-    // Scroll listener for streak section
-    function handleStreakScroll() {
-        const rect = streakSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        // Calculate scroll progress through the section
-        // Section is "active" when it's in the middle third of viewport
-        const sectionMiddle = rect.top + (rect.height / 2);
-        const viewportMiddle = windowHeight / 2;
-
-        // Progress from 0 to 1 as section scrolls through viewport
-        let progress = 0;
-
-        if (rect.top < windowHeight && rect.bottom > 0) {
-            // Section is visible
-            const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
-            const totalScrollDistance = windowHeight + rect.height;
-            const scrolled = windowHeight - rect.top;
-            progress = Math.max(0, Math.min(1, scrolled / totalScrollDistance));
-        }
-
-        updateStreak(progress);
-    }
-
-    // Initial state
-    updateStreak(0);
-
-    // Add scroll listener
-    window.addEventListener('scroll', handleStreakScroll);
-    handleStreakScroll(); // Initial check
+    ScrollTrigger.create({
+        trigger: streakSection,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        onUpdate: (self) => updateStreak(self.progress)
+    });
 }
-
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initStreakAnimation);
-} else {
-    initStreakAnimation();
-}
-
 
 // Typewriter Effect for Distraction Input
 function initTypewriterEffect() {
@@ -186,55 +173,16 @@ function initTypewriterEffect() {
     const timerSection = document.querySelector('.timer-section');
     if (!timerSection) return;
 
-    let currentText = '';
-    let hasTyped = false;
-
     function updateTypewriter(progress) {
-        // Calculate how many characters to show based on scroll progress
         const charCount = Math.floor(progress * fullText.length);
-        const newText = fullText.substring(0, charCount);
-
-        if (newText !== currentText) {
-            currentText = newText;
-            input.value = currentText;
-
-            // Add cursor blink effect when typing
-            if (progress > 0 && progress < 1) {
-                input.style.caretColor = 'white';
-            }
-        }
+        input.value = fullText.substring(0, charCount);
     }
 
-    function handleScroll() {
-        const rect = timerSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        // Start typing when section is in middle of viewport
-        if (rect.top < windowHeight * 0.6 && rect.bottom > windowHeight * 0.4) {
-            const sectionHeight = rect.height;
-            const scrolled = windowHeight * 0.6 - rect.top;
-            const progress = Math.max(0, Math.min(1, scrolled / (sectionHeight * 0.5)));
-
-            updateTypewriter(progress);
-            hasTyped = true;
-        } else if (!hasTyped && rect.top > windowHeight * 0.6) {
-            // Reset if scrolled back up before typing started
-            currentText = '';
-            input.value = '';
-        }
-    }
-
-    // Initial state
-    input.value = '';
-
-    // Add scroll listener
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    ScrollTrigger.create({
+        trigger: timerSection,
+        start: 'top 60%',
+        end: 'bottom 40%',
+        onUpdate: (self) => updateTypewriter(self.progress)
+    });
 }
 
-// Initialize typewriter when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTypewriterEffect);
-} else {
-    initTypewriterEffect();
-}
