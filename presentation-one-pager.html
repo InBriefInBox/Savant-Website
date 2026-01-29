@@ -23,81 +23,13 @@
             --cyan: #4DEBFF;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background-deep);
-            color: var(--text-primary);
-            min-height: 100vh;
-        }
-
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(180deg, #17153D 0%, #2E2A5E 40%, #0F172A 100%);
-            overflow: hidden;
-        }
-
-        .grad {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-        }
-
-        .grad-top-right {
-            background: radial-gradient(circle at 95% 25%, rgba(255, 228, 181, 0.6) 0%, rgba(255, 165, 0, 0.4) 30%, transparent 70%);
-        }
-
-        .grad-bottom-left {
-            background: radial-gradient(circle at 20% 90%, rgba(255, 20, 147, 0.4) 0%, transparent 60%);
-        }
-
-        .grad-bottom-right {
-            background: radial-gradient(circle at 85% 85%, rgba(100, 149, 237, 0.4) 0%, transparent 60%);
-        }
-
         .scroll-content {
-            padding: 60px 40px;
+            padding: 151px 41px 61px;
+            /* Adjusted for fixed navbar */
             max-width: 900px;
             margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .branding-text {
-            font-size: 52px;
-            color: var(--eggshell);
-            letter-spacing: 22px;
-            margin: 0;
-            margin-left: 22px;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            font-weight: 300;
-        }
-
-        .subtitle-text {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 10px;
-            font-style: italic;
-            letter-spacing: 1px;
-        }
-
-        .tagline-text {
-            font-size: 14px;
-            color: var(--eggshell);
-            margin-top: 20px;
-            font-weight: 600;
-            opacity: 0.9;
+            position: relative;
+            z-index: 2;
         }
 
         .glass-card {
@@ -281,151 +213,158 @@
 </head>
 
 <body class="sunset-vibe">
-    < !-- Ambient Background System -->
-        <div class="savant-background">
-            <div class="gradient-layer grad-sunset"></div>
-            <div class="gradient-layer grad-sun-core"></div>
-            <div class="gradient-layer grad-center"></div>
-            <div class="gradient-layer grad-center-focus"></div>
-            <div class="gradient-layer grad-gold-balance"></div>
-            <div class="gradient-layer grad-bottom-left"></div>
-            <div class="gradient-layer grad-bottom-right"></div>
+    <!-- Ambient Background System -->
+    <div class="savant-background">
+        <div class="gradient-layer grad-sunset"></div>
+        <div class="gradient-layer grad-sun-core"></div>
+        <div class="gradient-layer grad-center"></div>
+        <div class="gradient-layer grad-center-focus"></div>
+        <div class="gradient-layer grad-gold-balance"></div>
+        <div class="gradient-layer grad-bottom-left"></div>
+        <div class="gradient-layer grad-bottom-right"></div>
+    </div>
+    <div class="noise-overlay"></div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-logo">SAVANT</div>
+            <div class="nav-links">
+                <a href="index.html#features" class="nav-link">Streamline Scheduling</a>
+                <a href="index.html#streak" class="nav-link">Streak</a>
+                <a href="index.html#schedules" class="nav-link">Passion Time</a>
+                <a href="index.html#stories" class="nav-link">Stories</a>
+                <a href="index.html#distractions" class="nav-link">handling distractions</a>
+            </div>
+            <div class="nav-links-right">
+                <a href="presentation-one-pager.html" class="nav-link-secondary active">For Educators</a>
+                <a href="https://apps.apple.com/us/app/savant-ai/id6747010054" target="_blank" rel="noopener noreferrer"
+                    class="btn-nav-try">download for free</a>
+            </div>
         </div>
-        <div class="noise-overlay"></div>
-        <nav class="navbar">
-            <div class="nav-content">
-                <div class="nav-logo">SAVANT</div>
-                <div class="nav-links">
-                    <a href="index.html#features" class="nav-link">Streamline Scheduling</a>
-                    <a href="index.html#streak" class="nav-link">Streak</a>
-                    <a href="index.html#schedules" class="nav-link">Passion Time</a>
-                    <a href="index.html#stories" class="nav-link">Stories</a>
-                    <a href="index.html#distractions" class="nav-link">handling distractions</a>
+    </nav>
+    <main>
+        <div class="scroll-content">
+            <div class="header" style="text-align: center; margin-bottom: 60px;">
+                <h1
+                    style="font-size: 52px; color: var(--eggshell); letter-spacing: 22px; margin: 0; margin-left: 22px; text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); font-weight: 300; font-family: 'Optima', sans-serif;">
+                    SAVANT</h1>
+                <div
+                    style="font-size: 18px; color: rgba(255, 255, 255, 0.8); margin-top: 10px; font-style: italic; letter-spacing: 1px; font-family: 'Playfair Display', serif;">
+                    The Autistic Lock‑In App</div>
+                <div
+                    style="font-size: 14px; color: var(--eggshell); margin-top: 20px; font-weight: 600; opacity: 0.9; font-family: 'Inter', sans-serif;">
+                    Build a project. Build community. Build self‑love.</div>
+            </div>
+            <div class="glass-card">
+                <div class="section-header"><span class="section-title">A Note from Harry</span></div>
+                <p>First and foremost,
+                    I want to thank you for taking the time to look into something that can help your students
+                    discover themselves through their passions. A massive portion of my own Neurodivergent childhood
+                    was teachers who took the time to help me feel like I belonged,
+                    and I would not be where I am today without them.</p>
+                <p>I’ve been doing a lot of introspection on my autism and how it’s shaped me,
+                    and I realized that so much of why I was able to be happy during my darkest childhood moments
+                    was the passion projects I made around my special interests. When I pursued them,
+                    I felt like what I was doing meant something and that I could carve out a place for myself to
+                    create value in the world.</p>
+                <p>In a moment where I felt that joy deep inside of me,
+                    I realized that I had to make something to help as many Neurodivergent people as possible
+                    discover the same thing.</p>
+                <p>I built the app I have to show you today so ND people with attention deficit differences could
+                    focus on completing a passion project,
+                    and finding the same level of joy I did all those years ago and carry with me to this day. With
+                    that,
+                    I thank you for being here and invite you to read on.</p>
+                <p><strong>Harry</strong></p>
+            </div>
+            <div class="glass-card">
+                <div class="section-header"><span class="section-title">Getting Rid of the Bad Parts</span></div>
+                <p class="intro-text">We take the parts of project‑building that ND brains struggle with,
+                    make them non‑issues,
+                    and let people focus on making stuff.</p>
+                <div class="feature-item">
+                    <div class="feature-title">No more Scheduling Stressing.</div>
+                    <div class="feature-text">Students can brain dump everything they need to get done in a day,
+                        and the app handles scheduling,
+                        prioritization,
+                        and time allotting for them.</div>
+                    <div class="feature-highlight">Less time scheduling. More time getting things done.</div>
                 </div>
-                <div class="nav-links-right">
-                    <a href="presentation-one-pager.html" class="nav-link-secondary active">For Educators</a>
-                    <a href="https://apps.apple.com/us/app/savant-ai/id6747010054" target="_blank"
-                        rel="noopener noreferrer" class="btn-nav-try">download for free</a>
+                <div class="feature-item">
+                    <div class="feature-title">Distracting Thought “Treasure Chest”.</div>
+                    <div class="feature-text">When a student is building and a distracting thought pops up,
+                        they can write it down and easily store it for later. We have a reminder system to prompt
+                        students to revisit their distracting thoughts so they don’t get lost in the void.</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-title">Creative Time Commitment.</div>
+                    <div class="feature-text">We let students block out certain hours of each day of the week to
+                        work on their project. Distracting apps are blocked during those times,
+                        and they’re fully freed up to create.</div>
                 </div>
             </div>
-        </nav>
-        <main>
-            <div class="scroll-content">
-                <div class="header">
-                    <h1 class="branding-text">SAVANT</h1>
-                    <div class="subtitle-text">The Autistic Lock‑In App</div>
-                    <div class="tagline-text">Build a project. Build community. Build self‑love.</div>
-                </div>
-                <div class="glass-card">
-                    <div class="section-header"><span class="section-title">A Note from Harry</span></div>
-                    <p>First and foremost,
-                        I want to thank you for taking the time to look into something that can help your students
-                        discover themselves through their passions. A massive portion of my own Neurodivergent childhood
-                        was teachers who took the time to help me feel like I belonged,
-                        and I would not be where I am today without them.</p>
-                    <p>I’ve been doing a lot of introspection on my autism and how it’s shaped me,
-                        and I realized that so much of why I was able to be happy during my darkest childhood moments
-                        was the passion projects I made around my special interests. When I pursued them,
-                        I felt like what I was doing meant something and that I could carve out a place for myself to
-                        create value in the world.</p>
-                    <p>In a moment where I felt that joy deep inside of me,
-                        I realized that I had to make something to help as many Neurodivergent people as possible
-                        discover the same thing.</p>
-                    <p>I built the app I have to show you today so ND people with attention deficit differences could
-                        focus on completing a passion project,
-                        and finding the same level of joy I did all those years ago and carry with me to this day. With
-                        that,
-                        I thank you for being here and invite you to read on.</p>
-                    <p><strong>Harry</strong></p>
-                </div>
-                <div class="glass-card">
-                    <div class="section-header"><span class="section-title">Getting Rid of the Bad Parts</span></div>
-                    <p class="intro-text">We take the parts of project‑building that ND brains struggle with,
-                        make them non‑issues,
-                        and let people focus on making stuff.</p>
-                    <div class="feature-item">
-                        <div class="feature-title">No more Scheduling Stressing.</div>
-                        <div class="feature-text">Students can brain dump everything they need to get done in a day,
-                            and the app handles scheduling,
-                            prioritization,
-                            and time allotting for them.</div>
-                        <div class="feature-highlight">Less time scheduling. More time getting things done.</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">Distracting Thought “Treasure Chest”.</div>
-                        <div class="feature-text">When a student is building and a distracting thought pops up,
-                            they can write it down and easily store it for later. We have a reminder system to prompt
-                            students to revisit their distracting thoughts so they don’t get lost in the void.</div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">Creative Time Commitment.</div>
-                        <div class="feature-text">We let students block out certain hours of each day of the week to
-                            work on their project. Distracting apps are blocked during those times,
-                            and they’re fully freed up to create.</div>
+            <div class="glass-card">
+                <div class="section-header"><span class="section-title">The Savant Journey</span></div>
+                <div class="quote-text">"The Joy is in the Journey" </div>
+                <div class="benefit-row">
+                    <div class="benefit-icon">✨</div>
+                    <div class="benefit-content">
+                        <h4>Creative Joy.</h4>
+                        <p>Making a passion project gives ND kids dopamine hits that don’t come from TikTok.</p>
                     </div>
                 </div>
-                <div class="glass-card">
-                    <div class="section-header"><span class="section-title">The Savant Journey</span></div>
-                    <div class="quote-text">"The Joy is in the Journey" </div>
-                    <div class="benefit-row">
-                        <div class="benefit-icon">✨</div>
-                        <div class="benefit-content">
-                            <h4>Creative Joy.</h4>
-                            <p>Making a passion project gives ND kids dopamine hits that don’t come from TikTok.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-row">
-                        <div class="benefit-icon">🤝</div>
-                        <div class="benefit-content">
-                            <h4>Bonding.</h4>
-                            <p>Through partaking in school Savant programs as well as events with our coast‑to‑coast
-                                partners,
-                                students can build beautiful relationships with kids who have brains like theirs.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-row">
-                        <div class="benefit-icon">❤️</div>
-                        <div class="benefit-content">
-                            <h4>Self love.</h4>
-                            <p>When our students finish projects,
-                                they see themselves in a new light. It’s quite exceptional to see.</p>
-                        </div>
+                <div class="benefit-row">
+                    <div class="benefit-icon">🤝</div>
+                    <div class="benefit-content">
+                        <h4>Bonding.</h4>
+                        <p>Through partaking in school Savant programs as well as events with our coast‑to‑coast
+                            partners,
+                            students can build beautiful relationships with kids who have brains like theirs.</p>
                     </div>
                 </div>
-                <div class="glass-card">
-                    <div class="section-header"><span class="section-title">The Pilot Roadmap</span></div>
-                    <div class="quote-text">Phased Rollout</div>
-                    <div class="phase-item">
-                        <div class="phase-badge">Phase 1</div>
-                        <div class="phase-title">Connection.</div>
-                        <div class="phase-text">Harry begins all pilot programs by speaking vulnerably with students
-                            about his own autistic journey with passion projects in a guest speaker session.</div>
+                <div class="benefit-row">
+                    <div class="benefit-icon">❤️</div>
+                    <div class="benefit-content">
+                        <h4>Self love.</h4>
+                        <p>When our students finish projects,
+                            they see themselves in a new light. It’s quite exceptional to see.</p>
                     </div>
-                    <div class="phase-item">
-                        <div class="phase-badge">Phase 2</div>
-                        <div class="phase-title">Building.</div>
-                        <div class="phase-text">We’ll work together to coordinate a passion project competition or
-                            showcase event where students use Savant to make mini passion projects and show them off to
-                            their peers. </div>
-                    </div>
-                    <div class="phase-item">
-                        <div class="phase-badge">Phase 3</div>
-                        <div class="phase-title">Joining the Savant community.</div>
-                        <div class="phase-text">Savant organizes competitions and showcases with students from schools
-                            all across the country. After the class competitions,
-                            your students will be well prepared to enter the big leagues.</div>
-                    </div>
-                </div>
-                <div class="glass-card cta-section">
-                    <div class="cta-title">Ready to unlock your students?</div>
-                    <p>Connect directly with Harry</p>
-                    <div class="email-container"><span class="email-text">hstevenson@oakwoodfriends.org</span></div>
                 </div>
             </div>
-        </main>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-        <script src="script.js"></script>
+            <div class="glass-card">
+                <div class="section-header"><span class="section-title">The Pilot Roadmap</span></div>
+                <div class="quote-text">Phased Rollout</div>
+                <div class="phase-item">
+                    <div class="phase-badge">Phase 1</div>
+                    <div class="phase-title">Connection.</div>
+                    <div class="phase-text">Harry begins all pilot programs by speaking vulnerably with students
+                        about his own autistic journey with passion projects in a guest speaker session.</div>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-badge">Phase 2</div>
+                    <div class="phase-title">Building.</div>
+                    <div class="phase-text">We’ll work together to coordinate a passion project competition or
+                        showcase event where students use Savant to make mini passion projects and show them off to
+                        their peers. </div>
+                </div>
+                <div class="phase-item">
+                    <div class="phase-badge">Phase 3</div>
+                    <div class="phase-title">Joining the Savant community.</div>
+                    <div class="phase-text">Savant organizes competitions and showcases with students from schools
+                        all across the country. After the class competitions,
+                        your students will be well prepared to enter the big leagues.</div>
+                </div>
+            </div>
+            <div class="glass-card cta-section">
+                <div class="cta-title">Ready to unlock your students?</div>
+                <p>Connect directly with Harry</p>
+                <div class="email-container"><span class="email-text">hstevenson@oakwoodfriends.org</span></div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
