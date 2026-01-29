@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: 'expo.out'
         }, "-=0.8");
 
-
     // Background Parallax
     gsap.to('.sunset-bg', {
         scrollTrigger: {
@@ -87,9 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize custom effects
     initStreakAnimation();
     initTypewriterEffect();
+
+    // Deep Refresh to ensure all layout calculations are correct
+    setTimeout(() => {
+        ScrollTrigger.refresh();
+    }, 500);
 });
 
-// Smooth scroll (Native CSS is usually enough, but here's the JS version for better control)
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -123,7 +127,9 @@ function initStreakAnimation() {
 
     function updateStreak(scrollProgress) {
         const totalDays = dayCircles.length;
-        const newStreak = Math.min(totalDays, Math.max(1, Math.floor(scrollProgress * totalDays) + 1));
+        // Map scroll percentage to day index (0 to totalDays)
+        const newStreak = Math.min(totalDays, Math.max(1, Math.floor(scrollProgress * (totalDays + 0.5)) + 1));
+
         if (newStreak !== currentStreak) {
             currentStreak = newStreak;
             gsap.to(streakTitle, {
@@ -142,18 +148,21 @@ function initStreakAnimation() {
                 circle.textContent = '✓';
             } else {
                 circle.classList.remove('completed');
-                circle.textContent = index + 1;
+                // Restore original day number if present, or just leave it
+                const originalDayNum = circle.getAttribute('data-day') || (index + 1);
+                circle.textContent = originalDayNum;
             }
         });
 
-        const progressWidth = (currentStreak / totalDays) * 100;
-        progressBar.style.width = `${progressWidth}%`;
+        const progressPercent = (currentStreak / totalDays) * 100;
+        progressBar.style.width = `${progressPercent}%`;
     }
 
     ScrollTrigger.create({
         trigger: streakSection,
-        start: 'top 80%',
-        end: 'bottom 20%',
+        start: 'top 75%',
+        end: 'bottom 25%',
+        scrub: true,
         onUpdate: (self) => updateStreak(self.progress)
     });
 }
