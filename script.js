@@ -39,59 +39,54 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 1,
             ease: 'expo.out'
         }, "-=0.8")
-        .from('.btn-hero-download', {
-            y: 20,
-            opacity: 0,
-            duration: 1,
-            ease: 'expo.out'
-        }, "-=0.6");
+}, "-=0.8");
 
-    // Background Parallax
-    gsap.to('.sunset-bg', {
+// Background Parallax
+gsap.to('.sunset-bg', {
+    scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1
+    },
+    y: 150,
+    ease: 'none'
+});
+
+// Reveal animations for sections
+const reveals = document.querySelectorAll('.max-feature-card, .testimonial-carousel-card, .premium-phone-mockup, .timer-circle');
+reveals.forEach(el => {
+    gsap.from(el, {
         scrollTrigger: {
-            trigger: 'body',
-            start: 'top top',
-            end: 'bottom bottom',
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+        },
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'expo.out'
+    });
+});
+
+// Premium Phone Parallax/Floating Effect
+document.querySelectorAll('.premium-phone-mockup .phone-frame').forEach(phone => {
+    gsap.to(phone, {
+        scrollTrigger: {
+            trigger: phone,
+            start: 'top bottom',
+            end: 'bottom top',
             scrub: 1
         },
-        y: 150,
+        y: -50,
+        rotateX: 10,
         ease: 'none'
     });
+});
 
-    // Reveal animations for sections
-    const reveals = document.querySelectorAll('.max-feature-card, .testimonial-carousel-card, .premium-phone-mockup, .timer-circle');
-    reveals.forEach(el => {
-        gsap.from(el, {
-            scrollTrigger: {
-                trigger: el,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
-            },
-            y: 60,
-            opacity: 0,
-            duration: 1.2,
-            ease: 'expo.out'
-        });
-    });
-
-    // Premium Phone Parallax/Floating Effect
-    document.querySelectorAll('.premium-phone-mockup .phone-frame').forEach(phone => {
-        gsap.to(phone, {
-            scrollTrigger: {
-                trigger: phone,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 1
-            },
-            y: -50,
-            rotateX: 10,
-            ease: 'none'
-        });
-    });
-
-    // Initialize custom effects
-    initStreakAnimation();
-    initTypewriterEffect();
+// Initialize custom effects
+initStreakAnimation();
+initTypewriterEffect();
 });
 
 // Smooth scroll (Native CSS is usually enough, but here's the JS version for better control)
