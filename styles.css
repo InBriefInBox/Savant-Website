@@ -112,11 +112,11 @@ body {
 }
 
 /* Layer 6: Bottom Left CTA Magnet (Vibrant Pink) */
-background: radial-gradient(circle at 50% 90%,
-    rgba(255, 20, 147, 0.5) 0%,
-    /* Reduced from 1.0 */
-    rgba(255, 20, 147, 0.3) 35%,
-    transparent 100%);
+.grad-bottom-left {
+    background: radial-gradient(circle at 50% 90%,
+            rgba(255, 20, 147, 0.5) 0%,
+            rgba(255, 20, 147, 0.3) 35%,
+            transparent 100%);
 }
 
 /* Layer 7: Bottom Right Atmospheric Anchor (Blue) */
@@ -218,10 +218,10 @@ background: radial-gradient(circle at 50% 90%,
     font-size: 0.9rem;
     letter-spacing: 1px;
     font-family: 'Playfair Display', serif;
-    font-style: italic;
+    font-style: normal;
+    /* Removed italics */
     position: relative;
     white-space: nowrap;
-    /* Prevent multiline links */
 }
 
 .nav-links .nav-link:hover {
@@ -236,7 +236,7 @@ background: radial-gradient(circle at 50% 90%,
 }
 
 .btn-nav-try {
-    background: var(--btn-primary-gradient, linear-gradient(90deg, #4f46e5 0%, #a855f7 25%, #ec4899 50%, #a855f7 75%, #4f46e5 100%));
+    background: linear-gradient(90deg, #4f46e5 0%, #a855f7 25%, #ec4899 50%, #a855f7 75%, #4f46e5 100%);
     background-size: 200% 100%;
     animation: gradient-shift 3s ease infinite;
     color: white;
@@ -246,7 +246,8 @@ background: radial-gradient(circle at 50% 90%,
     font-weight: 500;
     font-size: 0.9rem;
     font-family: 'Playfair Display', serif;
-    font-style: italic;
+    font-style: normal;
+    /* Removed italics */
     transition: all 0.3s ease;
     border: none;
     box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
@@ -255,9 +256,9 @@ background: radial-gradient(circle at 50% 90%,
 }
 
 .btn-nav-try:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-1px);
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
 }
 
 .nav-links-right {
@@ -294,12 +295,12 @@ background: radial-gradient(circle at 50% 90%,
     text-decoration: none;
     font-size: 0.9rem;
     font-family: 'Playfair Display', serif;
-    font-style: italic;
+    font-style: normal;
+    /* Removed italics */
     font-weight: 400;
     padding: 0.5rem 1.2rem;
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 100px;
-    /* Fully rounded */
     transition: all 0.3s ease;
     white-space: nowrap;
     flex-shrink: 0;
@@ -349,7 +350,8 @@ background: radial-gradient(circle at 50% 90%,
     font-weight: 300;
     font-style: normal;
     line-height: 0.9;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    /* Reduced from 3rem */
     letter-spacing: 0.4em;
     /* Luxury ultra-wide tracking */
     color: #F4F0E6;
@@ -362,7 +364,8 @@ background: radial-gradient(circle at 50% 90%,
 .hero-subtitle {
     font-size: clamp(2rem, 5vw, 4rem);
     color: var(--text-primary);
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
+    /* Reduced from 4rem */
     line-height: 1.2;
     font-family: 'Playfair Display', serif;
     font-style: italic;
