@@ -72,8 +72,8 @@ body {
             #FF6347 65%,
             rgba(255, 69, 0, 0.9) 85%,
             transparent 100%);
-    opacity: 0.6;
-    /* Reduced from 1.0 */
+    opacity: 1;
+    /* Restored from 0.6 */
     width: 120%;
     /* Expanded to spill over more */
     height: 120%;
@@ -114,17 +114,18 @@ body {
 /* Layer 6: Bottom Left CTA Magnet (Vibrant Pink) */
 .grad-bottom-left {
     background: radial-gradient(circle at 50% 90%,
-            rgba(255, 20, 147, 0.5) 0%,
-            rgba(255, 20, 147, 0.3) 35%,
+            rgba(255, 20, 147, 1) 0%,
+            /* Restored intensity */
+            rgba(255, 20, 147, 0.85) 35%,
             transparent 100%);
 }
 
 /* Layer 7: Bottom Right Atmospheric Anchor (Blue) */
 .grad-bottom-right {
     background: radial-gradient(circle at 85% 85%,
-            rgba(100, 149, 237, 0.5) 0%,
-            /* Reduced from 1.0 */
-            rgba(100, 149, 237, 0.3) 35%,
+            rgba(100, 149, 237, 1) 0%,
+            /* Restored intensity */
+            rgba(100, 149, 237, 0.8) 35%,
             transparent 100%);
 }
 

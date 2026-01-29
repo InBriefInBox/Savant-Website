@@ -38,55 +38,55 @@ document.addEventListener('DOMContentLoaded', () => {
             opacity: 0,
             duration: 1,
             ease: 'expo.out'
-        }, "-=0.8")
-}, "-=0.8");
+        }, "-=0.8");
 
-// Background Parallax
-gsap.to('.sunset-bg', {
-    scrollTrigger: {
-        trigger: 'body',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1
-    },
-    y: 150,
-    ease: 'none'
-});
 
-// Reveal animations for sections
-const reveals = document.querySelectorAll('.max-feature-card, .testimonial-carousel-card, .premium-phone-mockup, .timer-circle');
-reveals.forEach(el => {
-    gsap.from(el, {
+    // Background Parallax
+    gsap.to('.sunset-bg', {
         scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-        },
-        y: 60,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'expo.out'
-    });
-});
-
-// Premium Phone Parallax/Floating Effect
-document.querySelectorAll('.premium-phone-mockup .phone-frame').forEach(phone => {
-    gsap.to(phone, {
-        scrollTrigger: {
-            trigger: phone,
-            start: 'top bottom',
-            end: 'bottom top',
+            trigger: 'body',
+            start: 'top top',
+            end: 'bottom bottom',
             scrub: 1
         },
-        y: -50,
-        rotateX: 10,
+        y: 150,
         ease: 'none'
     });
-});
 
-// Initialize custom effects
-initStreakAnimation();
-initTypewriterEffect();
+    // Reveal animations for sections
+    const reveals = document.querySelectorAll('.max-feature-card, .testimonial-carousel-card, .premium-phone-mockup, .timer-circle');
+    reveals.forEach(el => {
+        gsap.from(el, {
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            },
+            y: 60,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'expo.out'
+        });
+    });
+
+    // Premium Phone Parallax/Floating Effect
+    document.querySelectorAll('.premium-phone-mockup .phone-frame').forEach(phone => {
+        gsap.to(phone, {
+            scrollTrigger: {
+                trigger: phone,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+            },
+            y: -50,
+            rotateX: 10,
+            ease: 'none'
+        });
+    });
+
+    // Initialize custom effects
+    initStreakAnimation();
+    initTypewriterEffect();
 });
 
 // Smooth scroll (Native CSS is usually enough, but here's the JS version for better control)
@@ -122,7 +122,8 @@ function initStreakAnimation() {
     let currentStreak = 1;
 
     function updateStreak(scrollProgress) {
-        const newStreak = Math.min(7, Math.max(1, Math.floor(scrollProgress * 7) + 1));
+        const totalDays = dayCircles.length;
+        const newStreak = Math.min(totalDays, Math.max(1, Math.floor(scrollProgress * totalDays) + 1));
         if (newStreak !== currentStreak) {
             currentStreak = newStreak;
             gsap.to(streakTitle, {
@@ -145,7 +146,7 @@ function initStreakAnimation() {
             }
         });
 
-        const progressWidth = (currentStreak / 7) * 100;
+        const progressWidth = (currentStreak / totalDays) * 100;
         progressBar.style.width = `${progressWidth}%`;
     }
 
