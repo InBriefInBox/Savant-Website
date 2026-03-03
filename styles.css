@@ -60,8 +60,8 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    filter: saturate(1.8) brightness(1.2);
-    /* Restored High-intensity vibrancy */
+    filter: saturate(1.8) brightness(1.25);
+    /* Slightly increased brightness from 1.2 */
 }
 
 /* Layer 1: Top Right Sunset (Multi-shade Orange) */
@@ -102,7 +102,8 @@ body {
 /* Layer 4: Center Focus (White Luminosity) */
 .grad-center-focus {
     background: radial-gradient(circle at 50% 45%,
-            rgba(255, 255, 255, 0.4) 0%,
+            rgba(255, 255, 255, 0.5) 0%,
+            /* Slightly increased from 0.4 */
             transparent 50%);
 }
 
@@ -2039,8 +2040,8 @@ body {
 
     /* Background optimization for mobile performance */
     .gradient-layer {
-        filter: saturate(1.6) brightness(1.15);
-        /* Restored mobile vibrancy */
+        filter: saturate(1.6) brightness(1.2);
+        /* Slightly increased from 1.15 */
     }
 
     .noise-overlay {
