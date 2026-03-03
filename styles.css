@@ -2037,7 +2037,7 @@ body {
 
     /* Background optimization for mobile performance */
     .gradient-layer {
-        filter: saturate(1.5) brightness(1.1);
+        filter: saturate(1.1) brightness(1.05);
     }
 
     .noise-overlay {
