@@ -115,25 +115,26 @@ body {
 
 /* Layer 6: Bottom Left CTA Magnet (Vibrant Pink) */
 .grad-bottom-left {
-    background: radial-gradient(circle at 50% 90%,
-            rgba(255, 20, 147, 0.9) 0%,
-            /* Restored near-max intensity */
-            rgba(255, 20, 147, 0.8) 35%,
-            /* Slightly softer than original 0.9/1.0 */
+    background: radial-gradient(circle at 40% 95%,
+            rgba(255, 20, 147, 0.95) 0%,
+            /* Bolder but still "ever so slightly" softer than 1.0 */
+            rgba(255, 20, 147, 0.7) 45%,
+            /* Increased spread */
             transparent 100%);
-    opacity: 0.9 !important;
-    /* Ever so slightly softer than 1.0 */
+    opacity: 0.95 !important;
+    /* High vibrancy */
 }
 
 /* Layer 7: Bottom Right Atmospheric Anchor (Blue) */
 .grad-bottom-right {
-    background: radial-gradient(circle at 85% 85%,
-            rgba(100, 149, 237, 0.7) 0%,
-            /* Muted from 1.0 */
-            rgba(100, 149, 237, 0.4) 35%,
+    background: radial-gradient(circle at 90% 90%,
+            rgba(100, 149, 237, 0.9) 0%,
+            /* Boosted vibrancy */
+            rgba(100, 149, 237, 0.6) 45%,
+            /* Increased spread */
             transparent 100%);
-    opacity: 0.9 !important;
-    /* Restored high opacity */
+    opacity: 0.95 !important;
+    /* High vibrancy */
 }
 
 /* Layer 8: Digital Grain / Film Noise */
