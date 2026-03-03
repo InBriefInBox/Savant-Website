@@ -1,3 +1,96 @@
+// ========================================
+// MOBILE MENU FUNCTIONALITY
+// ========================================
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const mobileNavDrawer = document.querySelector('.mobile-nav-drawer');
+const body = document.body;
+
+if (mobileMenuToggle && mobileNavDrawer) {
+    // Toggle mobile menu
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        mobileNavDrawer.classList.toggle('active');
+        body.style.overflow = mobileNavDrawer.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close menu when clicking on a nav link
+    const mobileNavLinks = mobileNavDrawer.querySelectorAll('.nav-link');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            mobileNavDrawer.classList.remove('active');
+            body.style.overflow = '';
+        });
+    });
+
+    // Close menu when clicking outside
+    mobileNavDrawer.addEventListener('click', (e) => {
+        if (e.target === mobileNavDrawer) {
+            mobileMenuToggle.classList.remove('active');
+            mobileNavDrawer.classList.remove('active');
+            body.style.overflow = '';
+        }
+    });
+}
+
+// ========================================
+// DEVICE DETECTION UTILITIES
+// ========================================
+function isMobileDevice() {
+    return window.innerWidth <= 768;
+}
+
+function isSmallMobile() {
+    return window.innerWidth <= 480;
+}
+
+function isTablet() {
+    return window.innerWidth <= 1024 && window.innerWidth > 768;
+}
+
+// ========================================
+// VIDEO LAZY LOADING
+// ========================================
+function initVideoLazyLoading() {
+    const videos = document.querySelectorAll('.master-video');
+
+    if ('IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const video = entry.target;
+                    const source = video.querySelector('source');
+
+                    // Only load if not already loaded
+                    if (source && !video.hasAttribute('data-loaded')) {
+                        video.setAttribute('data-loaded', 'true');
+                        video.load();
+                    }
+
+                    // Play video when in viewport
+                    video.play().catch(() => {
+                        // Autoplay prevented, that's okay
+                    });
+                } else {
+                    // Pause video when out of viewport to save performance
+                    entry.target.pause();
+                }
+            });
+        }, {
+            rootMargin: '50px' // Start loading slightly before entering viewport
+        });
+
+        videos.forEach(video => {
+            videoObserver.observe(video);
+        });
+    } else {
+        // Fallback for browsers without IntersectionObserver
+        videos.forEach(video => {
+            video.load();
+        });
+    }
+}
+
 // Register GSAP ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,6 +118,9 @@ window.addEventListener('scroll', () => {
 
 // GSAP Animations
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize video lazy loading
+    initVideoLazyLoading();
+
     // Hero Stagger
     const heroTl = gsap.timeline();
     heroTl.from('.hero-title', {
@@ -40,17 +136,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: 'expo.out'
         }, "-=0.8");
 
-    // Background Parallax
-    gsap.to('.sunset-bg', {
-        scrollTrigger: {
-            trigger: 'body',
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1
-        },
-        y: 150,
-        ease: 'none'
-    });
+    // Background Parallax - disabled on mobile for performance
+    if (!isMobileDevice()) {
+        gsap.to('.sunset-bg', {
+            scrollTrigger: {
+                trigger: 'body',
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1
+            },
+            y: 150,
+            ease: 'none'
+        });
+    }
 
     // Reveal animations for sections
     const reveals = document.querySelectorAll('.max-feature-card, .testimonial-carousel-card, .premium-phone-mockup, .timer-circle');
@@ -61,27 +159,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: 'top 85%',
                 toggleActions: 'play none none reverse'
             },
-            y: 60,
+            y: isMobileDevice() ? 30 : 60, // Reduced movement on mobile
             opacity: 0,
-            duration: 1.2,
+            duration: isMobileDevice() ? 0.8 : 1.2, // Faster animations on mobile
             ease: 'expo.out'
         });
     });
 
-    // Premium Phone Parallax/Floating Effect
-    document.querySelectorAll('.premium-phone-mockup .phone-frame').forEach(phone => {
-        gsap.to(phone, {
-            scrollTrigger: {
-                trigger: phone,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 1
-            },
-            y: -50,
-            rotateX: 10,
-            ease: 'none'
+    // Premium Phone Parallax/Floating Effect - simplified on mobile
+    if (!isMobileDevice()) {
+        document.querySelectorAll('.premium-phone-mockup .phone-frame').forEach(phone => {
+            gsap.to(phone, {
+                scrollTrigger: {
+                    trigger: phone,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                },
+                y: -50,
+                rotateX: 10,
+                ease: 'none'
+            });
         });
-    });
+    }
 
     // Initialize custom effects
     initStreakAnimation();
@@ -93,17 +193,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
 });
 
-// Smooth scroll
+// Smooth scroll with passive event listeners for better mobile performance
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             target.scrollIntoView({
-                behavior: 'smooth'
+                behavior: 'smooth',
+                block: 'start'
             });
         }
-    });
+    }, { passive: false });
 });
 
 // Interactive Streak Section Animation

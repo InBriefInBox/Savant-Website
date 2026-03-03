@@ -125,10 +125,12 @@ body {
 /* Layer 7: Bottom Right Atmospheric Anchor (Blue) */
 .grad-bottom-right {
     background: radial-gradient(circle at 85% 85%,
-            rgba(100, 149, 237, 1) 0%,
-            rgba(100, 149, 237, 0.9) 35%,
+            rgba(100, 149, 237, 0.7) 0%,
+            /* Muted from 1.0 */
+            rgba(100, 149, 237, 0.4) 35%,
             transparent 100%);
-    opacity: 1 !important;
+    opacity: 0.8 !important;
+    /* Slightly lowered from 1.0 */
 }
 
 /* Layer 8: Digital Grain / Film Noise */
@@ -166,8 +168,8 @@ body {
     /* Increased blur */
     -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 0.4rem 2rem;
-    /* Slimmer padding */
+    padding: 0.3rem 1.2rem;
+    /* Compressed padding */
     border-radius: 100px;
     display: flex;
     justify-content: center;
@@ -181,19 +183,19 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
-    /* Balanced gap */
+    gap: 1rem;
+    /* Compressed gap */
     padding: 0 0.5rem;
     flex-wrap: nowrap;
     width: 100%;
 }
 
 .nav-logo {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 300;
     color: #F4F0E6;
     text-transform: uppercase;
-    letter-spacing: 8px;
+    letter-spacing: 6px;
     font-family: 'Optima', 'Segoe UI', 'Candara', 'Bitstream Vera Sans', 'DejaVu Sans', sans-serif;
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     flex-shrink: 0;
@@ -215,10 +217,10 @@ body {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     font-weight: 400;
-    padding: 0.6rem 1.2rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 100px;
     transition: all 0.3s ease;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 1px;
     font-family: 'Playfair Display', serif;
     font-style: normal;
@@ -243,11 +245,11 @@ body {
     background-size: 200% 100%;
     animation: gradient-shift 3s ease infinite;
     color: white;
-    padding: 0.5rem 1.2rem;
+    padding: 0.4rem 1rem;
     border-radius: 100px;
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-family: 'Playfair Display', serif;
     font-style: normal;
     /* Removed italics */
@@ -267,7 +269,7 @@ body {
 .nav-links-right {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
     flex-shrink: 0;
 }
 
@@ -296,12 +298,12 @@ body {
 .nav-link-secondary {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-family: 'Playfair Display', serif;
     font-style: normal;
     /* Removed italics */
     font-weight: 400;
-    padding: 0.5rem 1.2rem;
+    padding: 0.4rem 1rem;
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 100px;
     transition: all 0.3s ease;
@@ -997,41 +999,6 @@ body {
     }
 }
 
-/* War Quote Section */
-.war-quote-section {
-    padding: 10rem 0;
-    text-align: center;
-
-}
-
-.war-quote-text {
-    font-size: clamp(3rem, 7vw, 6rem);
-    font-family: 'Playfair Display', serif;
-    line-height: 1.3;
-    max-width: 1100px;
-    margin: 0 auto 4rem;
-    font-weight: 400;
-}
-
-.btn-war-build {
-    display: inline-block;
-    background: linear-gradient(90deg, #4f46e5 0%, #a855f7 25%, #ec4899 50%, #a855f7 75%, #4f46e5 100%);
-    background-size: 200% 100%;
-    animation: gradient-shift 3s ease infinite;
-    color: white;
-    padding: 1.2rem 3rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
-}
-
-.btn-war-build:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(236, 72, 153, 0.5);
-}
 
 
 /* Timer Section */
@@ -1319,9 +1286,11 @@ body {
     }
 }
 
+/* Carousel continues spinning on hover */
 .carousel-track:hover {
-    animation-play-state: paused;
+    animation-play-state: running;
 }
+
 
 /* Blur non-hovered testimonial cards */
 .carousel-track:hover .testimonial-carousel-card:not(:hover) {
@@ -1350,11 +1319,8 @@ body {
     transform: translateY(-10px) scale(1.02);
     border-color: rgba(96, 165, 250, 0.5);
     background: rgba(96, 165, 250, 0.05);
-    box-shadow:
-        0 0 0 1px rgba(96, 165, 250, 0.3),
-        0 0 50px rgba(96, 165, 250, 0.2),
-        0 30px 60px rgba(0, 0, 0, 0.5);
 }
+
 
 .testimonial-quote {
     font-size: 1.25rem;
@@ -1905,44 +1871,675 @@ body {
     font-weight: 300;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* ========================================
+   MOBILE RESPONSIVE STYLES
+   ======================================== */
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+    position: relative;
+}
+
+.mobile-menu-toggle span {
+    width: 100%;
+    height: 3px;
+    background: #F4F0E6;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Mobile Navigation Drawer */
+.mobile-nav-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    z-index: 1000;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 100px 2rem 2rem;
+    overflow-y: auto;
+}
+
+.mobile-nav-drawer.active {
+    right: 0;
+}
+
+.mobile-nav-drawer .nav-link {
+    display: block;
+    padding: 1.2rem 1rem;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-drawer .nav-link:active {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+   TABLET BREAKPOINT (≤1024px)
+   ======================================== */
+@media (max-width: 1024px) {
     .container {
-        padding: 0 0.75rem;
+        max-width: 100%;
+        padding: 0 1.5rem;
+    }
+
+    /* Show mobile menu toggle, hide desktop nav */
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .navbar {
+        width: 90%;
+        padding: 0.6rem 1.5rem;
     }
 
     .nav-links {
-        gap: 1rem;
-        font-size: 1.25rem;
+        display: none;
     }
 
+    /* Navbar adjustments */
+    .nav-logo {
+        font-size: 1.2rem;
+        letter-spacing: 4px;
+    }
+
+    .nav-links-right {
+        gap: 0.5rem;
+    }
+
+    .nav-link-secondary {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .btn-nav-try {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    /* Hero section */
     .hero {
-        padding-top: 70px;
-        min-height: auto;
-        padding-bottom: 2rem;
+        padding-top: 100px;
+        min-height: 90vh;
     }
 
-    .hero-buttons {
+    .hero-title {
+        font-size: clamp(3rem, 10vw, 7rem);
+        letter-spacing: 0.3em;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1.5rem, 4vw, 3rem);
+    }
+
+    /* Phone mockups */
+    .phone-frame {
+        width: 280px;
+        height: 580px;
+    }
+
+    /* Sections */
+    .showcase,
+    .imagine-section,
+    .build-amazing-section,
+    .max-autism-section {
+        padding: 6rem 0;
+    }
+
+    .showcase-title,
+    .imagine-title {
+        font-size: clamp(3rem, 8vw, 6rem);
+    }
+}
+
+/* ========================================
+   MOBILE BREAKPOINT (≤768px)
+   ======================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* Background optimization for mobile performance */
+    .gradient-layer {
+        filter: saturate(1.5) brightness(1.1);
+    }
+
+    .noise-overlay {
+        opacity: 0.05;
+    }
+
+    /* Navbar */
+    .navbar {
+        width: 95%;
+        top: 15px;
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-logo {
+        font-size: 1rem;
+        letter-spacing: 3px;
+    }
+
+    .nav-links-right {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .nav-link-secondary {
+        display: none;
+        /* Hide "For Educators" on small mobile */
+    }
+
+    .btn-nav-try {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding-top: 90px;
+        padding-bottom: 3rem;
+        min-height: auto;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 12vw, 5rem);
+        letter-spacing: 0.2em;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1.2rem, 5vw, 2rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-hero-download {
+        padding: 1.2rem 2.5rem;
+        font-size: 1.2rem;
+        width: 90%;
+        max-width: 400px;
+    }
+
+    /* Hero Stats */
+    .hero-stats {
+        gap: 2rem;
+        margin-top: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 1.1rem;
+    }
+
+    /* Showcase Section */
+    .showcase {
+        padding: 4rem 0 3rem;
+    }
+
+    .showcase-title {
+        font-size: clamp(2.5rem, 9vw, 5rem);
+        margin-bottom: 3rem;
+    }
+
+    /* Lock-in Status / Phone Mockups */
+    .lock-in-status {
+        padding: 3rem 0;
+    }
+
+    .premium-phone-mockup {
+        padding: 1rem 0;
+        perspective: 1500px;
+    }
+
+    .phone-frame {
+        width: 260px;
+        height: 530px;
+        border-radius: 40px;
+        padding: 10px;
+    }
+
+    /* Disable 3D hover effects on mobile */
+    .premium-phone-mockup:hover .phone-frame {
+        transform: translateY(-10px);
+    }
+
+    .phone-notch {
+        width: 140px;
+        height: 28px;
+    }
+
+    .phone-screen {
+        border-radius: 32px;
+    }
+
+    /* Imagine Section */
+    .imagine-section {
+        padding: 4rem 0;
+    }
+
+    .star-shape {
+        width: 180px;
+        height: 180px;
+    }
+
+    .star-shape::before {
+        font-size: 140px;
+    }
+
+    .imagine-title {
+        font-size: clamp(2rem, 8vw, 4.5rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .imagine-subtitle {
+        font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+        padding: 0 1rem;
+    }
+
+    /* Max Autism Section (Features) */
+    .max-autism-section {
+        padding: 4rem 0;
+    }
+
+    .max-autism-title {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        margin-bottom: 1rem;
+    }
+
+    .max-autism-subtitle {
+        font-size: clamp(1.1rem, 4vw, 2rem);
+        margin-bottom: 2rem;
+    }
+
+    .max-features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .max-feature-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .max-feature-title {
+        font-size: 1.5rem;
+    }
+
+    .max-feature-text {
+        font-size: 1.1rem;
+    }
+
+    /* Premium Buttons */
+    .btn-premium {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        width: 90%;
+        max-width: 400px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .btn-escape-brainrot,
+    .btn-war-build,
+    .btn-streak-save,
+    .btn-download-iphone {
+        font-size: 1.1rem;
+        padding: 1.1rem 2rem;
+    }
+
+
+    /* Streak Section */
+    .streak-section {
+        padding: 4rem 0;
+    }
+
+    .streak-title {
+        font-size: clamp(2rem, 7vw, 4rem);
+        margin-bottom: 2rem;
+    }
+
+    .streak-days {
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .day-item {
+        min-width: 60px;
+    }
+
+    .day-label {
+        font-size: 0.9rem;
+    }
+
+    .day-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.1rem;
+    }
+
+    /* Schedules Section */
+    .schedules-section {
+        padding: 4rem 0;
+    }
+
+    .schedules-title {
+        font-size: clamp(2rem, 7vw, 4rem);
+        margin-bottom: 1rem;
+    }
+
+    .schedules-subtitle {
+        font-size: clamp(1.1rem, 4vw, 1.8rem);
+        margin-bottom: 2rem;
+    }
+
+    /* Testimonials Carousel */
+    .testimonials-carousel-section {
+        padding: 4rem 0;
+    }
+
+    .testimonials-carousel-title {
+        font-size: clamp(2rem, 7vw, 4rem);
+        margin-bottom: 1rem;
+    }
+
+    .testimonials-carousel-subtitle {
+        font-size: clamp(1.1rem, 4vw, 1.8rem);
+        margin-bottom: 2rem;
+    }
+
+    .testimonial-carousel-card {
+        min-width: 90%;
+        padding: 2rem 1.5rem;
+    }
+
+    .testimonial-quote {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .testimonial-name {
+        font-size: 1.1rem;
+    }
+
+    .testimonial-role {
+        font-size: 0.95rem;
+    }
+
+    /* Master Mind Section */
+    .master-mind-section {
+        padding: 4rem 0;
+    }
+
+    .master-mind-title {
+        font-size: clamp(2rem, 7vw, 4rem);
+        margin-bottom: 1rem;
+    }
+
+    .master-mind-subtitle {
+        font-size: clamp(1.1rem, 4vw, 1.8rem);
+        margin-bottom: 2rem;
+    }
+
+    /* Download Footer Section */
+    .download-footer-section {
+        padding: 4rem 0;
+    }
+
+    .app-icon-wrapper {
+        margin-bottom: 2rem;
+    }
+
+    .app-icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .download-footer-title {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        margin-bottom: 2rem;
+    }
+
+    .footer-actions {
         flex-direction: column;
+        gap: 1rem;
         align-items: stretch;
     }
 
-    .btn {
-        width: 100%;
+    .btn-presentation {
+        width: 90%;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 1.1rem 2rem;
+        font-size: 1.1rem;
     }
 
-    .features-grid,
-    .testimonials-grid {
-        grid-template-columns: 1fr;
+    /* General adjustments */
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .btn {
+        width: 90%;
+        max-width: 400px;
     }
 
     .footer-content {
         flex-direction: column;
         text-align: center;
+        gap: 2rem;
     }
 
     .footer-links {
         justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+/* ========================================
+   SMALL MOBILE BREAKPOINT (≤480px)
+   ======================================== */
+@media (max-width: 480px) {
+
+    /* Ultra-compact navbar */
+    .navbar {
+        padding: 0.4rem 0.8rem;
+    }
+
+    .nav-logo {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+
+    .btn-nav-try {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.7rem;
+    }
+
+    /* Hero ultra-compact */
+    .hero {
+        padding-top: 80px;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 11vw, 3.5rem);
+        letter-spacing: 0.15em;
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1rem, 5vw, 1.5rem);
+        margin-bottom: 1rem;
+    }
+
+    .btn-hero-download {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        width: 95%;
+    }
+
+    /* Phone mockups even smaller */
+    .phone-frame {
+        width: 240px;
+        height: 490px;
+    }
+
+    /* Tighter sections */
+    .showcase,
+    .imagine-section,
+    .max-autism-section,
+    .streak-section,
+    .schedules-section,
+    .testimonials-carousel-section,
+    .master-mind-section,
+    .war-quote-section,
+    .download-footer-section {
+        padding: 3rem 0;
+    }
+
+    /* Smaller feature cards */
+    .max-feature-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .max-feature-title {
+        font-size: 1.3rem;
+    }
+
+    .max-feature-text {
+        font-size: 1rem;
+    }
+
+    /* Compact buttons */
+    .btn-premium {
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+        width: 95%;
+    }
+
+    /* Compact testimonials */
+    .testimonial-carousel-card {
+        min-width: 95%;
+        padding: 1.5rem 1rem;
+    }
+
+    .testimonial-quote {
+        font-size: 1rem;
+    }
+
+    /* Smaller day circles */
+    .day-item {
+        min-width: 50px;
+    }
+
+    .day-circle {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+
+    .day-label {
+        font-size: 0.8rem;
+    }
+
+    /* App icon smaller */
+    .app-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* Mobile nav drawer links */
+    .mobile-nav-drawer .nav-link {
+        font-size: 1.3rem;
+        padding: 1rem 0.8rem;
+    }
+}
+
+/* Touch optimization - larger tap targets */
+@media (hover: none) and (pointer: coarse) {
+
+    /* Ensure all interactive elements meet 44x44px minimum */
+    .btn,
+    .nav-link,
+    .mobile-menu-toggle,
+    .testimonial-carousel-card,
+    .day-circle {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Disable hover effects on touch devices */
+    .premium-phone-mockup:hover .phone-frame {
+        box-shadow:
+            0 0 0 2px #222,
+            0 30px 60px -12px rgba(0, 0, 0, 0.7),
+            0 18px 36px -18px rgba(0, 0, 0, 0.8),
+            inset 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    /* Add active state feedback for touch */
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+    .nav-link:active,
+    .mobile-menu-toggle:active {
+        opacity: 0.7;
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .premium-phone-mockup:hover .phone-frame {
+        transform: none;
     }
 }
 
