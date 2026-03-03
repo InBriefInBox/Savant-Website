@@ -1306,17 +1306,17 @@ body {
 
 .testimonial-carousel-card {
     min-width: 450px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(10, 15, 26, 0.6);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
     border-radius: 40px;
     padding: 3.5rem;
     flex-shrink: 0;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.3),
-        inset 0 0 20px rgba(255, 255, 255, 0.02);
+        0 40px 80px rgba(0, 0, 0, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
 
@@ -1758,17 +1758,7 @@ body {
     margin-top: 1.5rem;
 }
 
-.testimonial-carousel-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 32px;
-    padding: 3rem;
-    min-width: 400px;
-    margin: 0 1rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* Redundant Testimonial Class removed - using .testimonial-carousel-card definition above */
 
 
 .testimonial-card {
@@ -2296,6 +2286,7 @@ body {
     .testimonial-carousel-card {
         min-width: 90%;
         padding: 2rem 1.5rem;
+        background: rgba(10, 15, 26, 0.8);
     }
 
     .testimonial-quote {
@@ -2469,6 +2460,7 @@ body {
     .testimonial-carousel-card {
         min-width: 95%;
         padding: 1.5rem 1rem;
+        background: rgba(10, 15, 26, 0.9);
     }
 
     .testimonial-quote {
