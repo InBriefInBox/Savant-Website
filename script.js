@@ -185,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize custom effects
     initStreakAnimation();
-    initTypewriterEffect();
 
     // Deep Refresh to ensure all layout calculations are correct
     setTimeout(() => {
@@ -207,16 +206,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }, { passive: false });
 });
 
-// Interactive Streak Section Animation
+// Interactive Streak Section Animation - Full-screen horizontalStatement
 function initStreakAnimation() {
     const streakSection = document.querySelector('.streak-section');
     if (!streakSection) return;
 
     const streakTitle = streakSection.querySelector('.streak-title');
     const dayCircles = streakSection.querySelectorAll('.day-circle');
+    const dayItems = streakSection.querySelectorAll('.day-item');
     const streakDays = streakSection.querySelector('.streak-days');
 
-    // Create progress bar overlay
+    // Create progress bar overlay if it doesn't exist
     if (!streakSection.querySelector('.streak-progress-bar')) {
         const progressBar = document.createElement('div');
         progressBar.className = 'streak-progress-bar';
@@ -226,13 +226,57 @@ function initStreakAnimation() {
     const progressBar = streakSection.querySelector('.streak-progress-bar');
     let currentStreak = 1;
 
-    function updateStreak(scrollProgress) {
-        const totalDays = dayCircles.length;
-        // Map scroll percentage to day index (0 to totalDays)
-        const newStreak = Math.min(totalDays, Math.max(1, Math.floor(scrollProgress * (totalDays + 0.5)) + 1));
+    // Calculate the total horizontal range
+    const totalDays = dayItems.length;
 
+    // We want the current day to stay centered, so we need to translate the container
+    // Based on the position of the dayItems
+    function updateStreakLayout(progress) {
+        // Calculate which day should be "active" based on progress (0 to 1)
+        const activeIndex = Math.min(totalDays - 1, Math.floor(progress * totalDays));
+        const activeItem = dayItems[activeIndex];
+
+        if (!activeItem) return;
+
+        // 1. Move the container to keep activeIndex at the center
+        // The container has padding: 0 50vw, so the first item (index 0) is at 0px relative to padding
+        const itemWidth = activeItem.offsetWidth;
+        const gap = parseInt(window.getComputedStyle(streakDays).gap) || 0;
+
+        // Offset is basically: index * (width + gap)
+        const offset = activeIndex * (itemWidth + gap);
+
+        gsap.to(streakDays, {
+            x: -offset,
+            duration: 0.1,
+            ease: 'none'
+        });
+
+        // 2. Update Active Classes and Scaling
+        dayItems.forEach((item, index) => {
+            if (index === activeIndex) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+
+            // Also handle completion up to activeIndex
+            const circle = item.querySelector('.day-circle');
+            if (index <= activeIndex) {
+                circle.classList.add('completed');
+                circle.textContent = '✓';
+            } else {
+                circle.classList.remove('completed');
+                const originalDayNum = circle.getAttribute('data-day') || (index + 1);
+                circle.textContent = originalDayNum;
+            }
+        });
+
+        // 3. Update Title Count
+        const newStreak = activeIndex + 1;
         if (newStreak !== currentStreak) {
             currentStreak = newStreak;
+            // Short pulse for title
             gsap.to(streakTitle, {
                 scale: 1.05,
                 duration: 0.1,
@@ -243,52 +287,23 @@ function initStreakAnimation() {
             });
         }
 
-        dayCircles.forEach((circle, index) => {
-            if (index < currentStreak) {
-                circle.classList.add('completed');
-                circle.textContent = '✓';
-            } else {
-                circle.classList.remove('completed');
-                // Restore original day number if present, or just leave it
-                const originalDayNum = circle.getAttribute('data-day') || (index + 1);
-                circle.textContent = originalDayNum;
-            }
-        });
-
-        const progressPercent = (currentStreak / totalDays) * 100;
-        progressBar.style.width = `${progressPercent}%`;
+        // 4. Update Progress Bar Width
+        // Progress bar starts at 50vw (center of screen) and grows to the right
+        const progressWidth = offset;
+        progressBar.style.width = `${progressWidth}px`;
     }
 
+    // Pin the streak section and scrub the layout update
     ScrollTrigger.create({
         trigger: streakSection,
-        start: 'top 75%',
-        end: 'bottom 25%',
-        scrub: true,
-        onUpdate: (self) => updateStreak(self.progress)
+        start: 'top top',
+        end: `+=${totalDays * 150}vmax`, // Make it feel long and immersive
+        pin: true,
+        scrub: 1, // Smooth scrolling
+        onUpdate: (self) => updateStreakLayout(self.progress),
+        invalidateOnRefresh: true
     });
 }
 
-// Typewriter Effect for Distraction Input
-function initTypewriterEffect() {
-    const input = document.querySelector('.distraction-input');
-    if (!input) return;
 
-    const fullText = input.getAttribute('data-typewriter');
-    if (!fullText) return;
-
-    const timerSection = document.querySelector('.timer-section');
-    if (!timerSection) return;
-
-    function updateTypewriter(progress) {
-        const charCount = Math.floor(progress * fullText.length);
-        input.value = fullText.substring(0, charCount);
-    }
-
-    ScrollTrigger.create({
-        trigger: timerSection,
-        start: 'top 60%',
-        end: 'bottom 40%',
-        onUpdate: (self) => updateTypewriter(self.progress)
-    });
-}
 
