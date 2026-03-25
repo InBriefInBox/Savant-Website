@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAVANT Presentation</title>
+    <title>SAVANT Presentation - For Educators</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -16,198 +16,368 @@
             --primary: #FF4D80;
             --secondary: #4D96FF;
             --accent: #FF9F4D;
-            --background-deep: #0F172A;
-            --text-primary: #FFFFFF;
-            --text-secondary: rgba(255, 255, 255, 0.85);
             --eggshell: #F4F0E6;
             --cyan: #4DEBFF;
+            --purple-glow: #a855f7;
+            --pink-glow: #ec4899;
+        }
+
+        body.sunset-vibe {
+            overflow: hidden;
+            /* No scrolling */
         }
 
         .scroll-content {
-            padding: 151px 41px 61px;
-            /* Adjusted for fixed navbar */
-            max-width: 900px;
+            padding: 85px 30px 10px;
+            max-width: 1400px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
+            height: calc(100vh - 95px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.08);
+        /* Narrative Spark Header */
+        .spark-header {
+            text-align: center;
+            margin-bottom: 20px;
+            opacity: 0;
+            /* For GSAP */
+        }
+
+        .spark-title {
+            font-size: 32px;
+            color: var(--eggshell);
+            letter-spacing: 15px;
+            margin: 0 0 5px 15px;
+            font-weight: 300;
+            font-family: 'Optima', sans-serif;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .spark-subtitle {
+            font-size: 18px;
+            color: #FFFFFF;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+
+        .spark-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        .presentation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: auto auto 20px;
+            max-width: 800px;
+            width: 100%;
+            min-height: 0;
+        }
+
+        .story-card {
+            background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 30px;
-            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 32px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            /* Prevent text spilling out visibly */
+            transition: transform 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+            opacity: 0;
+            /* For GSAP */
+            transform: translateY(30px);
+            aspect-ratio: 1 / 1;
         }
 
-        .section-header {
+        .story-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Abstract glowing accents inside cards based on theme */
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, var(--glow-color) 0%, transparent 50%);
+            opacity: 0.1;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .story-card:hover::before {
+            opacity: 0.2;
+        }
+
+        .card-amplifier {
+            --glow-color: var(--cyan);
+        }
+
+        .card-showcase {
+            --glow-color: var(--pink-glow);
+        }
+
+        .card-partnership {
+            --glow-color: var(--secondary);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow-y: auto;
+            align-items: flex-start;
+            justify-content: flex-start;
+            text-align: left;
+            padding-top: 10px;
+            /* Let card content scroll within card if it still overflows gracefully */
+        }
+
+        /* Hide scrollbar for card content */
+        .card-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: var(--eggshell);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .section-title {
-            font-family: 'Abril Fatface', cursive;
-            font-size: 24px;
-            color: #FFFFFF;
-            margin: 0;
-        }
-
-        .section-icon {
+        .card-icon svg {
             width: 24px;
             height: 24px;
-            margin-right: 12px;
-            color: var(--primary);
         }
 
-        p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 16px;
-        }
-
-        .intro-text {
-            font-size: 17px;
+        .card-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
             font-weight: 600;
             color: #FFFFFF;
-            margin-bottom: 20px;
+            margin: 0 0 16px 0;
+            letter-spacing: -0.5px;
+            line-height: 1.25;
+            text-align: left;
         }
 
-        .feature-item {
-            margin-bottom: 20px;
-            padding-left: 16px;
-            border-left: 2px solid var(--primary);
-        }
-
-        .feature-title {
-            font-weight: 700;
-            color: var(--eggshell);
-            font-size: 17px;
-            margin-bottom: 4px;
-        }
-
-        .feature-text {
+        .card-text {
+            font-family: 'Inter', sans-serif;
             font-size: 15px;
+            line-height: 1.55;
             color: rgba(255, 255, 255, 0.85);
-        }
-
-        .feature-highlight {
-            font-weight: 700;
-            color: var(--cyan);
-            font-size: 15px;
-            margin-top: 8px;
-            font-style: italic;
-        }
-
-        .quote-text {
-            font-family: 'Abril Fatface', cursive;
-            font-size: 20px;
-            color: var(--eggshell);
-            text-align: center;
-            margin-bottom: 24px;
-            font-style: italic;
-        }
-
-        .benefit-row {
-            display: flex;
-            margin-bottom: 20px;
-            align-items: flex-start;
-        }
-
-        .benefit-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 16px;
-            flex-shrink: 0;
-        }
-
-        .benefit-content h4 {
-            margin: 0 0 4px 0;
-            font-size: 17px;
-            font-weight: 700;
-        }
-
-        .benefit-content p {
             margin: 0;
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.85);
+            text-align: left;
         }
 
-        .phase-item {
-            margin-bottom: 24px;
+        /* Feature points for Amplifier */
+        .story-point {
+            margin-bottom: 10px;
+            padding-left: 14px;
+            border-left: 2px solid var(--cyan);
+            transition: border-color 0.3s ease;
         }
 
-        .phase-badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 4px 10px;
-            border-radius: 12px;
-            display: inline-block;
+        .story-card:hover .story-point {
+            border-color: var(--text-primary);
+        }
+
+        .sp-title {
+            font-weight: 600;
+            color: var(--eggshell);
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .sp-text {
+            font-size: 12.5px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.35;
+        }
+
+        /* Roadmap Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 16px;
+            margin-top: 5px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            bottom: 5px;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 14px;
+        }
+
+        .tl-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: -15px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--secondary);
+            border: 2px solid #0F172A;
+            box-shadow: 0 0 8px var(--secondary);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .story-card:hover .tl-dot {
+            transform: scale(1.2);
+            background: var(--cyan);
+            box-shadow: 0 0 12px var(--cyan);
+        }
+
+        .tl-title {
+            font-weight: 700;
+            font-size: 13.5px;
+            color: var(--eggshell);
+            margin-bottom: 2px;
+        }
+
+        .tl-text {
             font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.35;
         }
 
-        .phase-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .phase-text {
-            font-size: 15px;
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        .cta-section {
-            text-align: center;
+        /* CTA Bar */
+        .cta-bar {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            opacity: 0;
+            /* For GSAP */
+            transform: translateY(20px);
         }
 
         .cta-title {
-            font-family: 'Abril Fatface', cursive;
-            font-size: 28px;
-            margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            color: var(--eggshell);
+            font-style: italic;
         }
 
-        .email-container {
+        .email-btn {
             background: rgba(255, 255, 255, 0.1);
-            padding: 16px;
-            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 20px;
+            gap: 8px;
         }
 
-        .email-text {
+        .email-btn:hover {
+            background: white;
+            color: #0F172A;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 10px;
+            opacity: 0;
+        }
+
+        .back-link a {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 13.5px;
             font-weight: 600;
+            border-bottom: 1px solid rgba(77, 235, 255, 0.5);
+            padding-bottom: 2px;
+            transition: border-color 0.3s;
         }
 
-        @media print {
-            body {
-                background-color: #0F172A !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+        .back-link a:hover {
+            border-color: var(--cyan);
+        }
+
+        @media screen and (max-height: 750px) {
+            body.sunset-vibe {
+                overflow-y: auto;
             }
 
-            .background {
-                display: block !important;
+            .scroll-content {
+                height: auto;
+                padding-top: 100px;
+                padding-bottom: 40px;
+            }
+        }
+
+        @media screen and (max-width: 850px) {
+            body.sunset-vibe {
+                overflow-y: auto;
             }
 
-            .glass-card {
-                background: rgba(255, 255, 255, 0.1) !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                break-inside: avoid;
+            .scroll-content {
+                height: auto;
+                padding-top: 100px;
+                padding-bottom: 40px;
+            }
+
+            .presentation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-bar {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
             }
         }
     </style>
@@ -227,7 +397,7 @@
 
     <nav class="navbar">
         <div class="nav-content">
-            <div class="nav-logo">SAVANT</div>
+            <a href="index.html" class="nav-logo" style="text-decoration: none;">SAVANT</a>
             <div class="nav-links">
                 <a href="index.html#features" class="nav-link">Streamline Scheduling</a>
                 <a href="index.html#streak" class="nav-link">Streak</a>
@@ -236,6 +406,7 @@
             </div>
             <div class="nav-links-right">
                 <a href="presentation-one-pager.html" class="nav-link-secondary active">For Educators</a>
+                <a href="note-from-harry.html" class="nav-link-secondary">A note from Harry</a>
                 <a href="https://apps.apple.com/us/app/savant-ai/id6747010054" target="_blank" rel="noopener noreferrer"
                     class="btn-nav-try">download for free</a>
             </div>
@@ -253,127 +424,99 @@
         <a href="index.html#streak" class="nav-link">Streak</a>
         <a href="index.html#stories" class="nav-link">Stories</a>
         <a href="feedback.html" class="nav-link">Feedback</a>
-        <a href="presentation-one-pager.html" class="nav-link">For Educators</a>
+        <a href="presentation-one-pager.html" class="nav-link active">For Educators</a>
+        <a href="note-from-harry.html" class="nav-link">A note from Harry</a>
         <a href="https://apps.apple.com/us/app/savant-ai/id6747010054" target="_blank" rel="noopener noreferrer"
             class="nav-link">Download for Free</a>
     </div>
+
     <main>
         <div class="scroll-content">
-            <div class="header" style="text-align: center; margin-bottom: 60px;">
-                <h1
-                    style="font-size: 52px; color: var(--eggshell); letter-spacing: 22px; margin: 0; margin-left: 22px; text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); font-weight: 300; font-family: 'Optima', sans-serif;">
-                    SAVANT</h1>
-                <div
-                    style="font-size: 18px; color: rgba(255, 255, 255, 0.8); margin-top: 10px; font-style: italic; letter-spacing: 1px; font-family: 'Playfair Display', serif;">
-                    The Autistic Lock‑In App</div>
-                <div
-                    style="font-size: 14px; color: var(--eggshell); margin-top: 20px; font-weight: 600; opacity: 0.9; font-family: 'Inter', sans-serif;">
-                    Build a project. Build community. Build self‑love.</div>
+
+            <div class="spark-header" id="anim-header">
+                <h1 class="spark-title">SAVANT</h1>
+                <div class="spark-subtitle">The Autistic Lock In App</div>
+                <div class="spark-text">
+                    Neurodivergent students have some of the deepest passions, but attention difficulties can make
+                    finishing projects difficult. Our focus tools adapted for neurodivergent learners streamline project
+                    creation from start to finish, filling neurodivergent lives with joy in the process.
+                </div>
             </div>
-            <div class="glass-card">
-                <div class="section-header"><span class="section-title">A Note from Harry</span></div>
-                <p>First and foremost,
-                    I want to thank you for taking the time to look into something that can help your students
-                    discover themselves through their passions. A massive portion of my own Neurodivergent childhood
-                    was teachers who took the time to help me feel like I belonged,
-                    and I would not be where I am today without them.</p>
-                <p>I’ve been doing a lot of introspection on my autism and how it’s shaped me,
-                    and I realized that so much of why I was able to be happy during my darkest childhood moments
-                    was the passion projects I made around my special interests. When I pursued them,
-                    I felt like what I was doing meant something and that I could carve out a place for myself to
-                    create value in the world.</p>
-                <p>In a moment where I felt that joy deep inside of me,
-                    I realized that I had to make something to help as many Neurodivergent people as possible
-                    discover the same thing.</p>
-                <p>I built the app I have to show you today so ND people with attention deficit differences could
-                    focus on completing a passion project,
-                    and finding the same level of joy I did all those years ago and carry with me to this day. With
-                    that,
-                    I thank you for being here and invite you to read on.</p>
-                <p><strong>Harry</strong></p>
-            </div>
-            <div class="glass-card">
-                <div class="section-header"><span class="section-title">Getting Rid of the Bad Parts</span></div>
-                <p class="intro-text">We take the parts of project‑building that ND brains struggle with,
-                    make them non‑issues,
-                    and let people focus on making stuff.</p>
-                <div class="feature-item">
-                    <div class="feature-title">No more Scheduling Stressing.</div>
-                    <div class="feature-text">Students can brain dump everything they need to get done in a day,
-                        and the app handles scheduling,
-                        prioritization,
-                        and time allotting for them.</div>
-                    <div class="feature-highlight">Less time scheduling. More time getting things done.</div>
+
+            <div class="presentation-grid">
+                <!-- Card 1: The Amplifier -->
+                <div class="story-card card-amplifier" id="anim-card-1">
+                    <div class="card-content">
+
+                        <h2 class="card-title">Bright quirky kids</h2>
+                        <p class="card-text">Neurodivergent passion is indescribably beautiful. Sometimes attention
+                            deficit differences make building stuff with it difficult!</p>
+
+
+                    </div>
                 </div>
 
-                <div class="feature-item">
-                    <div class="feature-title">Creative Time Commitment.</div>
-                    <div class="feature-text">We let students block out certain hours of each day of the week to
-                        work on their project. Distracting apps are blocked during those times,
-                        and they’re fully freed up to create.</div>
-                </div>
-            </div>
-            <div class="glass-card">
-                <div class="section-header"><span class="section-title">The Savant Journey</span></div>
-                <div class="quote-text">"The Joy is in the Journey" </div>
-                <div class="benefit-row">
-                    <div class="benefit-icon">✨</div>
-                    <div class="benefit-content">
-                        <h4>Creative Joy.</h4>
-                        <p>Making a passion project gives ND kids dopamine hits that don’t come from TikTok.</p>
+                <!-- Card 2: The Showcase -->
+                <div class="story-card card-showcase" id="anim-card-2">
+                    <div class="card-content">
+
+                        <h2 class="card-title">Tools that help</h2>
+                        <p class="card-text">We adapted focus tools to work for bright and quirky brains, helping them
+                            complete amazing passion projects!</p>
+
+
                     </div>
                 </div>
-                <div class="benefit-row">
-                    <div class="benefit-icon">🤝</div>
-                    <div class="benefit-content">
-                        <h4>Bonding.</h4>
-                        <p>Through partaking in school Savant programs as well as events with our coast‑to‑coast
-                            partners,
-                            students can build beautiful relationships with kids who have brains like theirs.</p>
-                    </div>
-                </div>
-                <div class="benefit-row">
-                    <div class="benefit-icon">❤️</div>
-                    <div class="benefit-content">
-                        <h4>Self love.</h4>
-                        <p>When our students finish projects,
-                            they see themselves in a new light. It’s quite exceptional to see.</p>
+
+                <!-- Card 3: Our Partnership -->
+                <div class="story-card card-partnership" id="anim-card-3">
+                    <div class="card-content">
+
+                        <h2 class="card-title">New senses of self</h2>
+                        <p class="card-text">When students finish these projects, they build pride in their craft that
+                            translates to pride in themselves.</p>
+
+
                     </div>
                 </div>
             </div>
-            <div class="glass-card">
-                <div class="section-header"><span class="section-title">The Pilot Roadmap</span></div>
-                <div class="quote-text">Phased Rollout</div>
-                <div class="phase-item">
-                    <div class="phase-badge">Phase 1</div>
-                    <div class="phase-title">Connection.</div>
-                    <div class="phase-text">Harry begins all pilot programs by speaking vulnerably with students
-                        about his own autistic journey with passion projects in a guest speaker session.</div>
-                </div>
-                <div class="phase-item">
-                    <div class="phase-badge">Phase 2</div>
-                    <div class="phase-title">Building.</div>
-                    <div class="phase-text">We’ll work together to coordinate a passion project competition or
-                        showcase event where students use Savant to make mini passion projects and show them off to
-                        their peers. </div>
-                </div>
-                <div class="phase-item">
-                    <div class="phase-badge">Phase 3</div>
-                    <div class="phase-title">Joining the Savant community.</div>
-                    <div class="phase-text">Savant organizes competitions and showcases with students from schools
-                        all across the country. After the class competitions,
-                        your students will be well prepared to enter the big leagues.</div>
-                </div>
+
+            <div class="cta-bar" id="anim-cta">
+                <h2 class="cta-title">Ready to empower your students?</h2>
+                <a href="mailto:hstevenson@oakwoodfriends.org" class="email-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    Let's Connect Directly
+                </a>
             </div>
-            <div class="glass-card cta-section">
-                <div class="cta-title">Ready to unlock your students?</div>
-                <p>Connect directly with Harry</p>
-                <div class="email-container"><span class="email-text">hstevenson@oakwoodfriends.org</span></div>
+
+            <div class="back-link" id="anim-link">
+                <a href="note-from-harry.html">Read a Note From Harry &rarr;</a>
             </div>
+
         </div>
     </main>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        // Storytelling GSAP Animation Sequence
+        document.addEventListener("DOMContentLoaded", (event) => {
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+            // Initial delay to ensure page rendering settles
+            setTimeout(() => {
+                tl.to("#anim-header", { opacity: 1, duration: 1 })
+                    .to("#anim-card-1", { opacity: 1, y: 0, duration: 0.8 }, "-=0.4")
+                    .to("#anim-card-2", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
+                    .to("#anim-card-3", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
+                    .to("#anim-cta", { opacity: 1, y: 0, duration: 0.8 }, "-=0.4")
+                    .to("#anim-link", { opacity: 1, duration: 0.6 }, "-=0.2");
+            }, 100);
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Note from Harry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary: #FF4D80;
+            --secondary: #4D96FF;
+            --accent: #FF9F4D;
+            --background-deep: #0F172A;
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --eggshell: #F4F0E6;
+            --cyan: #4DEBFF;
+        }
+
+        .scroll-content {
+            padding: 151px 41px 61px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            page-break-inside: avoid;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        @media print {
+            body {
+                background-color: #0F172A !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .glass-card {
+                background: rgba(255, 255, 255, 0.1) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body class="sunset-vibe">
+    <div class="savant-background">
+        <div class="gradient-layer grad-sunset"></div>
+        <div class="gradient-layer grad-sun-core"></div>
+        <div class="gradient-layer grad-center"></div>
+        <div class="gradient-layer grad-center-focus"></div>
+        <div class="gradient-layer grad-gold-balance"></div>
+        <div class="gradient-layer grad-bottom-left"></div>
+        <div class="gradient-layer grad-bottom-right"></div>
+    </div>
+    <div class="noise-overlay"></div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="nav-logo" style="text-decoration: none;">SAVANT</a>
+            <div class="nav-links">
+                <a href="index.html#features" class="nav-link">Streamline Scheduling</a>
+                <a href="index.html#streak" class="nav-link">Streak</a>
+                <a href="index.html#stories" class="nav-link">Stories</a>
+                <a href="feedback.html" class="nav-link">Feedback</a>
+            </div>
+            <div class="nav-links-right">
+                <a href="presentation-one-pager.html" class="nav-link-secondary">For Educators</a>
+                <a href="note-from-harry.html" class="nav-link-secondary active">A note from Harry</a>
+                <a href="https://apps.apple.com/us/app/savant-ai/id6747010054" target="_blank" rel="noopener noreferrer"
+                    class="btn-nav-try">download for free</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer">
+        <a href="index.html#features" class="nav-link">Streamline Scheduling</a>
+        <a href="index.html#streak" class="nav-link">Streak</a>
+        <a href="index.html#stories" class="nav-link">Stories</a>
+        <a href="feedback.html" class="nav-link">Feedback</a>
+        <a href="presentation-one-pager.html" class="nav-link">For Educators</a>
+        <a href="note-from-harry.html" class="nav-link active">A note from Harry</a>
+        <a href="https://apps.apple.com/us/app/savant-ai/id6747010054" target="_blank" rel="noopener noreferrer"
+            class="nav-link">Download for Free</a>
+    </div>
+
+    <main>
+        <div class="scroll-content">
+            <div class="header" style="text-align: center; margin-bottom: 60px;">
+                <h1
+                    style="font-size: 52px; color: var(--eggshell); letter-spacing: 22px; margin: 0; margin-left: 22px; text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); font-weight: 300; font-family: 'Optima', sans-serif;">
+                    SAVANT</h1>
+                <div
+                    style="font-size: 18px; color: rgba(255, 255, 255, 0.8); margin-top: 10px; font-style: italic; letter-spacing: 1px; font-family: 'Playfair Display', serif;">
+                    A Note from Harry</div>
+                <div
+                    style="font-size: 14px; color: var(--eggshell); margin-top: 20px; font-weight: 600; opacity: 0.9; font-family: 'Inter', sans-serif;">
+                    From the founder</div>
+            </div>
+
+            <div class="glass-card">
+                <p>First and foremost,
+                    I want to thank you for taking the time to look into something that can help your students
+                    discover themselves through their passions. A massive portion of my own Neurodivergent childhood
+                    was teachers who took the time to help me feel like I belonged,
+                    and I would not be where I am today without them.</p>
+                <p>I’ve been doing a lot of introspection on my autism and how it’s shaped me,
+                    and I realized that so much of why I was able to be happy during my darkest childhood moments
+                    was the passion projects I made around my special interests. When I pursued them,
+                    I felt like what I was doing meant something and that I could carve out a place for myself to
+                    create value in the world.</p>
+                <p>In a moment where I felt that joy deep inside of me,
+                    I realized that I had to make something to help as many Neurodivergent people as possible
+                    discover the same thing.</p>
+                <p>I built the app I have to show you today so ND people with attention deficit differences could
+                    focus on completing a passion project,
+                    and finding the same level of joy I did all those years ago and carry with me to this day. With
+                    that,
+                    I thank you for being here and invite you to read on.</p>
+                <br>
+                <p style="font-family: 'Abril Fatface', cursive; font-size: 24px; color: var(--primary);">Harry</p>
+
+                <div style="margin-top: 40px; text-align: center;">
+                    <a href="presentation-one-pager.html"
+                        style="color: var(--cyan); text-decoration: none; font-weight: 600; font-size: 16px; border-bottom: 1px solid var(--cyan); padding-bottom: 2px;">&larr;
+                        Back to Presentation</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
